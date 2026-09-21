@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BBiG — Klausurvorbereitung</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#E9E8E2;
+  --sheet:#FBFAF6;
+  --sheet-2:#F2F1EB;
+  --ink:#1F2328;
+  --ink-2:#5C6168;
+  --rule:#C7C5BB;
+  --rule-soft:#DEDCD3;
+  --blue:#2B4EA2;
+  --blue-soft:#E3E9F7;
+  --green:#2C6A4D;
+  --green-soft:#E0EDE5;
+  --red:#BC2F23;
+  --red-soft:#F7E4E1;
+  --amber:#8A6512;
+  --shadow:0 1px 0 rgba(31,35,40,.06);
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light dark;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#15171B;
+    --sheet:#1D2025;
+    --sheet-2:#23272D;
+    --ink:#E9E8E2;
+    --ink-2:#9BA1A9;
+    --rule:#353A42;
+    --rule-soft:#2A2E35;
+    --blue:#90AAEE;
+    --blue-soft:#1D2540;
+    --green:#7BC49E;
+    --green-soft:#16271E;
+    --red:#E8877C;
+    --red-soft:#2D1816;
+    --amber:#D6AC54;
+    --shadow:0 1px 0 rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#15171B; --sheet:#1D2025; --sheet-2:#23272D;
+  --ink:#E9E8E2; --ink-2:#9BA1A9; --rule:#353A42; --rule-soft:#2A2E35;
+  --blue:#90AAEE; --blue-soft:#1D2540;
+  --green:#7BC49E; --green-soft:#16271E;
+  --red:#E8877C; --red-soft:#2D1816; --amber:#D6AC54;
+  --shadow:0 1px 0 rgba(0,0,0,.35);
+}
+*,*::before,*::after{box-sizing:inherit}
+html{ -webkit-text-size-adjust:100%; scroll-padding-top:env(safe-area-inset-top,0px); }
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Archivo","Helvetica Neue",Arial,sans-serif;
+  font-size:16px;
+  line-height:1.45;
+  -webkit-font-smoothing:antialiased;
+  font-variant-numeric:tabular-nums;
+}
+button{font:inherit;color:inherit;margin:0}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+
+.wrap{max-width:560px;margin:0 auto;padding:0 14px 120px}
+
+/* ---------- Formularkopf ---------- */
+.masthead{
+  border:1px solid var(--ink);
+  background:var(--sheet);
+  margin:14px 0 18px;
+}
+.masthead-top{
+  display:flex;align-items:stretch;
+  border-bottom:1px solid var(--ink);
+}
+.mark{
+  padding:12px 12px 10px;
+  border-right:1px solid var(--ink);
+  font-weight:700;
+  font-size:26px;
+  line-height:1;
+  letter-spacing:-.02em;
+  display:flex;align-items:center;
+  font-family:"Source Serif 4",Georgia,serif;
+}
+.masthead-title{padding:10px 12px;flex:1}
+.masthead-title h1{
+  margin:0;font-size:17px;font-weight:600;letter-spacing:-.01em;line-height:1.2;
+}
+.masthead-title p{margin:2px 0 0;font-size:12.5px;color:var(--ink-2)}
+.masthead-meta{
+  display:grid;grid-template-columns:1fr 1fr 1fr;
+}
+.meta-cell{padding:8px 12px 9px;border-right:1px solid var(--rule)}
+.meta-cell:last-child{border-right:0}
+.meta-cell .k{font-size:10.5px;color:var(--ink-2);display:block;line-height:1.3}
+.meta-cell .v{font-size:19px;font-weight:600;letter-spacing:-.01em}
+
+/* ---------- Abschnitts-Karten ---------- */
+.sectionlist{display:flex;flex-direction:column;gap:9px}
+.sec{
+  display:flex;width:100%;text-align:left;
+  background:var(--sheet);
+  border:1px solid var(--rule);
+  border-radius:2px;
+  padding:0;cursor:pointer;
+  box-shadow:var(--shadow);
+  transition:border-color .12s ease, background .12s ease;
+}
+.sec:active{background:var(--sheet-2)}
+.sec:hover{border-color:var(--ink-2)}
+.sec-letter{
+  width:44px;flex:none;
+  border-right:1px solid var(--rule);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:16px;
+  color:var(--blue);
+  background:var(--sheet-2);
+}
+.sec-body{padding:11px 12px 12px;flex:1;min-width:0}
+.sec-body h2{margin:0;font-size:15.5px;font-weight:600;letter-spacing:-.005em}
+.sec-body p{margin:2px 0 0;font-size:13px;color:var(--ink-2);line-height:1.35}
+.sec-state{
+  flex:none;display:flex;align-items:center;padding-right:12px;
+  font-size:12px;color:var(--ink-2);
+}
+.tick{
+  width:17px;height:17px;border:1px solid var(--rule);
+  display:inline-flex;align-items:center;justify-content:center;
+  background:var(--paper);
+}
+.tick.on{border-color:var(--green);background:var(--green-soft);color:var(--green);font-weight:700;font-size:12px}
+.sec.weak .sec-letter{color:var(--red)}
+.sec.weak{border-color:var(--red)}
+
+.note{
+  margin:16px 0 0;font-size:12.5px;color:var(--ink-2);
+  border-top:1px solid var(--rule-soft);padding-top:10px;line-height:1.5;
+}
+.linkbtn{
+  background:none;border:0;padding:0;color:var(--blue);
+  text-decoration:underline;text-underline-offset:2px;cursor:pointer;font-size:12.5px;
+}
+
+/* ---------- Session ---------- */
+.bar{
+  position:sticky;top:0;z-index:20;
+  background:var(--paper);
+  padding-top:env(safe-area-inset-top,0px);
+  border-bottom:1px solid var(--rule);
+}
+.bar-in{
+  max-width:560px;margin:0 auto;padding:9px 14px 8px;
+  display:flex;align-items:center;gap:12px;
+}
+.back{
+  background:none;border:1px solid var(--rule);border-radius:2px;
+  padding:5px 9px;font-size:13px;cursor:pointer;line-height:1;
+}
+.bar-title{font-size:13.5px;font-weight:600;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar-count{font-size:13px;color:var(--ink-2);flex:none}
+.pbar{height:2px;background:var(--rule-soft)}
+.pbar i{display:block;height:100%;background:var(--blue);width:0;transition:width .25s ease}
+
+.card{
+  background:var(--sheet);border:1px solid var(--rule);border-radius:2px;
+  padding:16px 14px;margin-top:14px;box-shadow:var(--shadow);
+}
+.eyebrow{font-size:11.5px;color:var(--ink-2);margin:0 0 8px}
+.q{margin:0;font-size:20px;line-height:1.3;font-weight:600;letter-spacing:-.015em}
+.q.small{font-size:17px;font-weight:500;line-height:1.4}
+.fall{
+  font-family:"Source Serif 4",Georgia,serif;
+  font-size:17px;line-height:1.5;margin:0;
+}
+.fall b{font-weight:600}
+
+.opts{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+.opt{
+  display:flex;gap:10px;align-items:flex-start;width:100%;text-align:left;
+  background:var(--sheet);border:1px solid var(--rule);border-radius:2px;
+  padding:11px 12px;cursor:pointer;font-size:15.5px;line-height:1.35;
+  transition:background .1s ease,border-color .1s ease;
+}
+.opt:active{background:var(--sheet-2)}
+.opt .let{
+  flex:none;width:20px;height:20px;border:1px solid var(--rule);
+  display:flex;align-items:center;justify-content:center;
+  font-size:11.5px;font-weight:600;color:var(--ink-2);margin-top:1px;
+}
+.opt.right{border-color:var(--green);background:var(--green-soft)}
+.opt.right .let{border-color:var(--green);color:var(--green)}
+.opt.wrong{border-color:var(--red);background:var(--red-soft)}
+.opt.wrong .let{border-color:var(--red);color:var(--red)}
+.opt.dim{opacity:.5}
+.opt[disabled]{cursor:default}
+
+.verdict{
+  margin-top:14px;border:1px solid var(--rule);border-radius:2px;
+  padding:12px;background:var(--sheet-2);
+}
+.verdict .vh{
+  font-size:13px;font-weight:700;letter-spacing:.01em;margin:0 0 5px;
+  display:flex;align-items:center;gap:7px;
+}
+.verdict.ok .vh{color:var(--green)}
+.verdict.no .vh{color:var(--red)}
+.verdict.ok{border-color:var(--green)}
+.verdict.no{border-color:var(--red)}
+.stamp{
+  border:1.5px solid currentColor;border-radius:2px;
+  padding:1px 5px;font-size:10.5px;letter-spacing:.04em;
+  transform:rotate(-2.5deg);
+}
+.verdict p{margin:0;font-size:14.5px;line-height:1.5;color:var(--ink)}
+.verdict p + p{margin-top:7px}
+.law{
+  font-family:"Source Serif 4",Georgia,serif;font-style:italic;
+  color:var(--ink-2);font-size:13.5px;display:block;margin-top:7px;
+}
+@media (prefers-reduced-motion: no-preference){
+  .verdict{animation:pop .18s ease-out}
+}
+@keyframes pop{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+/* Flip */
+.flipface{
+  min-height:150px;display:flex;align-items:center;
+  font-size:19px;line-height:1.35;font-weight:600;letter-spacing:-.01em;
+}
+.flipback{border-top:1px dashed var(--rule);margin-top:14px;padding-top:13px}
+.flipback ul{margin:8px 0 0;padding-left:18px}
+.flipback li{margin:0 0 5px;font-size:15px;line-height:1.4}
+.flipback p{margin:0;font-size:15.5px;line-height:1.5}
+
+/* Recall */
+.slots{list-style:none;margin:14px 0 0;padding:0;counter-reset:s}
+.slots li{
+  border:1px solid var(--rule-soft);border-radius:2px;
+  padding:9px 11px;margin-bottom:7px;font-size:15px;line-height:1.35;
+  display:flex;gap:10px;align-items:flex-start;background:var(--sheet-2);
+  color:var(--ink-2);
+}
+.slots li .n{flex:none;width:18px;font-weight:600;color:var(--ink-2);font-size:13px;margin-top:1px}
+.slots li.shown{background:var(--sheet);color:var(--ink);border-color:var(--rule)}
+.slots li.hit{border-color:var(--green);background:var(--green-soft)}
+.slots li.miss{border-color:var(--red);background:var(--red-soft)}
+.selfcheck{display:flex;gap:7px;margin-top:9px}
+.selfcheck button{
+  flex:1;border:1px solid var(--rule);background:var(--sheet);border-radius:2px;
+  padding:9px;font-size:13.5px;cursor:pointer;
+}
+.selfcheck .yes{border-color:var(--green);color:var(--green)}
+.selfcheck .no{border-color:var(--red);color:var(--red)}
+
+/* Matrix */
+.matrix{margin-top:14px;border:1px solid var(--ink);background:var(--sheet)}
+.mrow{display:grid;grid-template-columns:78px 1fr 1fr;border-bottom:1px solid var(--rule)}
+.mrow:last-child{border-bottom:0}
+.mrow.head{background:var(--sheet-2);border-bottom:1px solid var(--ink)}
+.mcell{padding:9px 8px;border-right:1px solid var(--rule);font-size:12.5px;line-height:1.3}
+.mcell:last-child{border-right:0}
+.mrow.head .mcell{font-weight:600;font-size:12px}
+.mrow .rowlab{font-weight:600;font-size:12px;display:flex;align-items:center}
+button.mcell{
+  background:var(--sheet);text-align:left;cursor:pointer;min-height:62px;
+  display:flex;align-items:center;
+}
+button.mcell.empty{color:var(--ink-2)}
+button.mcell.right{background:var(--green-soft);border-color:var(--green)}
+button.mcell.wrong{background:var(--red-soft);border-color:var(--red)}
+.picker{margin-top:12px;border:1px solid var(--blue);border-radius:2px;padding:11px;background:var(--blue-soft)}
+.picker h3{margin:0 0 9px;font-size:13px;font-weight:600}
+
+/* Spickzettel */
+.cheat h2{
+  font-size:13px;font-weight:700;margin:20px 0 7px;
+  padding-bottom:4px;border-bottom:1px solid var(--rule);
+}
+.cheat h2:first-child{margin-top:0}
+.cheat dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:5px 12px;font-size:14.5px}
+.cheat dt{font-weight:600;white-space:nowrap}
+.cheat dd{margin:0;color:var(--ink)}
+.cheat ul{margin:0;padding-left:18px;font-size:14.5px}
+.cheat li{margin-bottom:4px;line-height:1.4}
+.cheat table{width:100%;border-collapse:collapse;font-size:13.5px}
+.cheat th,.cheat td{border:1px solid var(--rule);padding:7px 8px;text-align:left;vertical-align:top}
+.cheat th{background:var(--sheet-2);font-weight:600;font-size:12.5px}
+
+/* Ergebnis */
+.score{font-size:52px;font-weight:700;letter-spacing:-.04em;line-height:1;margin:0}
+.score small{font-size:20px;font-weight:500;color:var(--ink-2);letter-spacing:-.01em}
+.reviewlist{margin-top:16px;display:flex;flex-direction:column;gap:9px}
+.rev{border:1px solid var(--rule);border-left:3px solid var(--red);border-radius:2px;padding:10px 11px;background:var(--sheet)}
+.rev p{margin:0;font-size:14px;line-height:1.4}
+.rev .rq{font-weight:600;margin-bottom:4px}
+.rev .ra{color:var(--ink-2);font-size:13.5px}
+
+/* Aktionsleiste */
+.actions{
+  position:fixed;left:0;right:0;bottom:0;z-index:30;
+  background:var(--paper);
+  border-top:1px solid var(--rule);
+  padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));
+}
+.actions-in{max-width:560px;margin:0 auto;display:flex;gap:8px}
+.btn{
+  flex:1;border:1px solid var(--ink);border-radius:2px;
+  background:var(--ink);color:var(--paper);
+  padding:13px;font-size:15.5px;font-weight:600;cursor:pointer;
+}
+.btn:active{opacity:.85}
+.btn.ghost{background:var(--sheet);color:var(--ink);border-color:var(--rule)}
+.btn[disabled]{opacity:.4;cursor:default}
+.hidden{display:none !important}
+</style>
+</head>
+<body>
+
+<div id="app"></div>
+<div class="actions hidden" id="actions"><div class="actions-in" id="actionsIn"></div></div>
+
+<script>
+/* ============================================================
+   FRAGENBANK
+   ============================================================ */
+
+const CASES = [
+  {id:"c1", t:"Herr Vogt verlangt, dass seine Azubis sich mit 10 % am Kauf neuer Werkzeuge beteiligen. Er nennt das eine erzieherische Maßnahme.",
+   ok:false, w:"Nicht zulässig.",
+   e:"Ausbildungsmittel — Werkzeuge, Werkstoffe, Fachliteratur — muss der Ausbildende kostenlos stellen. Eine Kostenbeteiligung ist unzulässig, egal wie sie begründet wird.",
+   l:"Pflicht zur kostenlosen Bereitstellung von Ausbildungsmitteln"},
+  {id:"c2", t:"Luca muss regelmäßig bei Herrn Vogt zu Hause den Rasen mähen und für dessen Frau Besorgungen erledigen. Vogt: „Lehrjahre sind keine Herrenjahre.“",
+   ok:false, w:"Nicht zulässig.",
+   e:"Dem Azubi dürfen nur Aufgaben übertragen werden, die dem Ausbildungszweck dienen und seinen körperlichen Kräften angemessen sind. Privatarbeiten beim Chef fallen raus.",
+   l:"Ausbildungsbezogene Tätigkeiten"},
+  {id:"c3", t:"Denis bekommt seine Ausbildungsvergütung für den Monat Mai erst am 2. Juni überwiesen.",
+   ok:false, w:"Zu spät.",
+   e:"Die Vergütung ist spätestens am letzten Arbeitstag des Monats zu zahlen, für den sie gilt. Der Mai-Lohn muss also im Mai auf dem Konto sein.",
+   l:"Fälligkeit der Vergütung"},
+  {id:"c4", t:"Denis langweilt sich in der Berufsschule, weil er ein technisches Gymnasium besucht hat. Sein Meister erlaubt ihm, stattdessen im Betrieb zu arbeiten.",
+   ok:false, w:"Nicht zulässig.",
+   e:"Der Ausbildende muss für den Berufsschulunterricht freistellen, er darf ihn nicht ersetzen. Die Schulpflicht ist öffentlich-rechtlich — weder Chef noch Azubi können darauf verzichten.",
+   l:"Freistellung für die Berufsschule"},
+  {id:"c5", t:"Sena will wegen einer Auftragsspitze zwei Wochen nicht zur Berufsschule. Sie ist damit einverstanden, der Chef auch.",
+   ok:false, w:"Nicht zulässig.",
+   e:"Einvernehmen hilft nicht. Die Freistellungspflicht steht nicht zur Disposition der Vertragsparteien.",
+   l:"Freistellung für die Berufsschule"},
+  {id:"c6", t:"Luca will die Ausbildung aufgeben und in einer Woche woanders anfangen. Er schickt Herrn Vogt eine fristlose Kündigung.",
+   ok:false, w:"Nicht zulässig.",
+   e:"Nach der Probezeit kann der Azubi zwar kündigen, wenn er die Ausbildung aufgibt oder sich für eine andere Berufstätigkeit ausbilden lassen will — aber mit vier Wochen Frist, schriftlich und unter Angabe des Grundes. Fristlos geht nur bei einem wichtigen Grund.",
+   l:"Kündigung durch den Auszubildenden"},
+  {id:"c7", t:"Denis bittet um sein Zeugnis. Herr Vogt: „Keine Zeit, ich maile dir in den nächsten Tagen was zu.“",
+   ok:false, w:"Nicht zulässig.",
+   e:"Das Zeugnis braucht Schriftform, die elektronische Form ist ausdrücklich ausgeschlossen. Papier mit eigenhändiger Unterschrift des Ausbildenden.",
+   l:"Zeugnis"},
+  {id:"c8", t:"Florian hat Werkzeug im Wert von 10 Euro gestohlen. Der Meister verlangt die fristlose Kündigung.",
+   ok:true, w:"Kann zulässig sein.",
+   e:"Diebstahl kann auch bei geringem Wert ein wichtiger Grund sein, weil das Vertrauensverhältnis zerstört ist. Es bleibt aber eine Einzelfallabwägung, und die Kündigung muss innerhalb von zwei Wochen ab Kenntnis erfolgen — schriftlich, mit Begründung.",
+   l:"Kündigung aus wichtigem Grund"},
+  {id:"c9", t:"Luca hat sich mehrfach geweigert, Anweisungen zu befolgen. Die Probezeit ist vorbei. Herr Vogt will ihn deshalb kündigen.",
+   ok:true, w:"Kann zulässig sein — aber nicht sofort.",
+   e:"Beharrliche Arbeitsverweigerung kann ein wichtiger Grund sein. Vorher muss aber in der Regel abgemahnt werden, damit der Azubi sein Verhalten ändern kann. Ohne Abmahnung hält die Kündigung meist nicht.",
+   l:"Kündigung aus wichtigem Grund"},
+  {id:"c10", t:"Marius hat die Abschlussprüfung nicht bestanden. Sein Kollege tröstet ihn: „Beim nächsten Mal klappt's.“",
+   ok:true, w:"Er darf wiederholen.",
+   e:"Eine nicht bestandene Abschlussprüfung kann zweimal wiederholt werden. Auf sein Verlangen verlängert sich das Ausbildungsverhältnis bis zur nächstmöglichen Wiederholungsprüfung, höchstens um ein Jahr.",
+   l:"Wiederholung der Abschlussprüfung"},
+  {id:"c11", t:"Luca soll bei 5 Grad im Freien den Transportschutz von Neuwagen entfernen. Er hält das für unzumutbar.",
+   ok:true, w:"Zulässig — mit Auflage.",
+   e:"Für Arbeiten im Freien gibt es keine gesetzliche Mindesttemperatur. Der Betrieb muss aber geeignete Schutz- und Wetterkleidung stellen und die Arbeitszeit im Kalten begrenzen. Das folgt aus dem Arbeitsschutz, nicht aus dem BBiG.",
+   l:"Arbeitsschutz"},
+  {id:"c12", t:"Im Vertrag steht: Kündigt der Azubi vorzeitig, zahlt er 500 Euro Vertragsstrafe.",
+   ok:false, w:"Nichtig.",
+   e:"Vertragsstrafen sind im Ausbildungsverhältnis nichtig. Ebenso nichtig: Entschädigungen für die Ausbildung selbst, pauschalierter Schadensersatz und Ausschlüsse von Schadensersatzansprüchen.",
+   l:"Nichtige Vereinbarungen"},
+  {id:"c13", t:"Im Vertrag steht: Nach der Ausbildung darf der Azubi zwei Jahre lang nicht bei einem Konkurrenzbetrieb arbeiten.",
+   ok:false, w:"Nichtig.",
+   e:"Eine Vereinbarung, die den Azubi für die Zeit nach der Ausbildung in seiner beruflichen Tätigkeit beschränkt, ist nichtig. Ausnahme nur, wenn er innerhalb der letzten sechs Monate in ein Arbeitsverhältnis übernommen wird.",
+   l:"Nichtige Vereinbarungen"},
+  {id:"c14", t:"Der Chef kündigt einem Azubi in der Probezeit mündlich beim Feierabend und bestätigt das per WhatsApp.",
+   ok:false, w:"Nicht zulässig.",
+   e:"Auch in der Probezeit gilt die Schriftform. Zwar braucht es dort keine Frist und keine Begründung — aber Papier und Unterschrift schon.",
+   l:"Form der Kündigung"},
+  {id:"c15", t:"Weil Klara ihm frech gekommen ist, kürzt Herr Wolf ihre Ausbildungsvergütung um 100 Euro im Monat.",
+   ok:false, w:"Nicht zulässig.",
+   e:"Die vereinbarte Vergütung darf nicht als Sanktion gekürzt werden. Die Vergütung ist keine Leistungsprämie, sondern vertraglich geschuldet und muss mindestens jährlich ansteigen.",
+   l:"Vergütung"},
+  {id:"c16", t:"Herr Wolf will den Ausbildungsvertrag erst nach der sechsmonatigen Probezeit ausfüllen und unterschreiben.",
+   ok:false, w:"Gleich zwei Fehler.",
+   e:"Die Niederschrift muss unverzüglich nach Vertragsabschluss erfolgen, spätestens vor Beginn der Ausbildung. Und eine Probezeit von sechs Monaten gibt es nicht — höchstens vier Monate.",
+   l:"Vertragsniederschrift + Probezeit"},
+  {id:"c17", t:"Klara erzählt ihrem Freund, dass ihr Chef 50.000 Euro Umsatz im Monat macht und wer ihm Geld schuldet.",
+   ok:false, w:"Pflichtverstoß.",
+   e:"Der Azubi muss über Betriebs- und Geschäftsgeheimnisse Stillschweigen bewahren. Umsatzzahlen und Kundenforderungen gehören dazu.",
+   l:"Geheimhaltungspflicht"},
+  {id:"c18", t:"Klara glaubt, nach der Probezeit könne ihr nichts mehr passieren, und bleibt eine Woche unentschuldigt weg.",
+   ok:false, w:"Pflichtverstoß, Kündigung möglich.",
+   e:"Unentschuldigtes Fehlen über eine Woche kann einen wichtigen Grund darstellen. Die Probezeit schützt nicht davor — sie ändert nur, dass jetzt ein wichtiger Grund nötig ist statt gar keiner.",
+   l:"Kündigung aus wichtigem Grund"},
+  {id:"c19", t:"Klara hat sich dreimal an der Aufschnittmaschine verletzt. Ihr Chef weigert sich, einen Restenschneider anzuschaffen: „Pflaster ist billiger.“",
+   ok:false, w:"Pflichtverstoß.",
+   e:"Der Ausbildende hat eine Sorgepflicht: Der Azubi darf weder sittlich noch körperlich gefährdet werden. Dazu kommen die Pflichten aus dem Arbeitsschutz, Schutzeinrichtungen bereitzustellen.",
+   l:"Sorgepflicht"},
+  {id:"c20", t:"Der Betrieb verlangt, dass das Berichtsheft zu Hause in der Freizeit geführt wird.",
+   ok:false, w:"Nicht zulässig.",
+   e:"Der Ausbildende muss das Berichtsheft kostenlos aushändigen, dem Azubi während der Ausbildungszeit Gelegenheit zum Führen geben und es regelmäßig durchsehen. Freizeit ist dafür tabu.",
+   l:"Berichtsheft"},
+  {id:"c21", t:"Ein Azubi besteht die Abschlussprüfung im Mai. Sein Vertrag läuft eigentlich bis 31. August.",
+   ok:true, w:"Ausbildung endet früher.",
+   e:"Bei bestandener Prüfung endet das Berufsausbildungsverhältnis vorzeitig — mit Bekanntgabe des Prüfungsergebnisses durch den Prüfungsausschuss, nicht erst zum Vertragsende.",
+   l:"Vorzeitige Beendigung"},
+  {id:"c22", t:"Der Chef fordert Klara auf, vormittags im Haushalt seiner Frau zu helfen. Klara macht daraufhin ihre Arbeit absichtlich schlampig und versalzt Salate.",
+   ok:false, w:"Beide im Unrecht.",
+   e:"Die Haushaltshilfe ist unzulässig, weil sie nicht dem Ausbildungszweck dient. Klaras Reaktion ist aber ebenfalls ein Pflichtverstoß: Sie muss übertragene Aufgaben sorgfältig ausführen. Selbstjustiz ist kein Rechtsmittel — der Weg wäre Ausbilder, JAV/Betriebsrat oder Kammer."
+   , l:"Pflichten beider Seiten"}
+];
+
+const NUMBERS = [
+  {id:"n1", q:"Wie lang muss eine Probezeit mindestens sein?", o:["14 Tage","1 Monat","6 Wochen","3 Monate"], c:1,
+   e:"Mindestens ein Monat. Deshalb wären die 14 Tage aus dem Dialog unzulässig."},
+  {id:"n2", q:"Wie lang darf eine Probezeit höchstens sein?", o:["2 Monate","3 Monate","4 Monate","6 Monate"], c:2,
+   e:"Höchstens vier Monate. Sechs Monate wie im normalen Arbeitsverhältnis gibt es in der Ausbildung nicht."},
+  {id:"n3", q:"Der Azubi will nach der Probezeit aufhören, weil er die Ausbildung aufgibt. Welche Frist gilt?", o:["Keine, fristlos","2 Wochen","4 Wochen","3 Monate zum Quartalsende"], c:2,
+   e:"Vier Wochen — nicht ein Monat. Vier Wochen sind 28 Tage ab Zugang der Kündigung, nicht bis zum Monatsende."},
+  {id:"n4", q:"Wann muss die Ausbildungsvergütung spätestens auf dem Konto sein?", o:["Am 15. des Folgemonats","Am letzten Arbeitstag des Monats","Am 1. des Folgemonats","Am 3. Werktag des Folgemonats"], c:1,
+   e:"Spätestens am letzten Arbeitstag des Monats, für den sie gezahlt wird."},
+  {id:"n5", q:"Wie oft darf eine nicht bestandene Abschlussprüfung wiederholt werden?", o:["Einmal","Zweimal","Dreimal","Unbegrenzt"], c:1,
+   e:"Zweimal. Danach ist Schluss."},
+  {id:"n6", q:"Um wie viel verlängert sich das Ausbildungsverhältnis höchstens, wenn die Prüfung nicht bestanden wurde?", o:["6 Monate","1 Jahr","Bis zur bestandenen Prüfung","2 Jahre"], c:1,
+   e:"Höchstens ein Jahr — und nur auf Verlangen des Auszubildenden, nicht automatisch."},
+  {id:"n7", q:"Gesetzlicher Mindesturlaub für einen volljährigen Azubi, in Werktagen?", o:["20","24","25","30"], c:1,
+   e:"24 Werktage bei einer Sechs-Tage-Woche. Das entspricht 20 Arbeitstagen bei Fünf-Tage-Woche."},
+  {id:"n8", q:"Ein Azubi ist zu Beginn des Kalenderjahres 15. Wie viele Werktage Urlaub mindestens?", o:["24","25","27","30"], c:3,
+   e:"30 Werktage. Bei Minderjährigen richtet sich der Urlaub nach dem Alter zu Beginn des Kalenderjahres."},
+  {id:"n9", q:"Ein Azubi ist zu Beginn des Kalenderjahres 16. Wie viele Werktage Urlaub mindestens?", o:["24","25","27","30"], c:2,
+   e:"27 Werktage. Staffel: unter 16 → 30, unter 17 → 27, unter 18 → 25."},
+  {id:"n10", q:"Ein Azubi ist zu Beginn des Kalenderjahres 17. Wie viele Werktage Urlaub mindestens?", o:["24","25","27","30"], c:1,
+   e:"25 Werktage."},
+  {id:"n11", q:"Wie lange darf ein minderjähriger Azubi täglich höchstens arbeiten?", o:["6 Stunden","7 Stunden","8 Stunden","10 Stunden"], c:2,
+   e:"8 Stunden am Tag und 40 in der Woche. Die 6 Stunden verwechselt man leicht mit der Pausenregel: über 6 Stunden Arbeitszeit → 60 Minuten Pause."},
+  {id:"n12", q:"Innerhalb welcher Frist muss eine fristlose Kündigung ab Kenntnis des Grundes ausgesprochen werden?", o:["3 Tage","2 Wochen","4 Wochen","3 Monate"], c:1,
+   e:"Zwei Wochen. Wer länger wartet, kann sich auf diesen Grund nicht mehr berufen."},
+  {id:"n13", q:"Wie oft muss die Ausbildungsvergütung mindestens ansteigen?", o:["Gar nicht","Jährlich","Halbjährlich","Nach der Zwischenprüfung"], c:1,
+   e:"Mindestens einmal jährlich, also mit jedem neuen Ausbildungsjahr."},
+  {id:"n14", q:"Innerhalb welcher Frist muss Schadensersatz nach vorzeitiger Beendigung geltend gemacht werden?", o:["2 Wochen","1 Monat","3 Monate","6 Monate"], c:2,
+   e:"Drei Monate nach Beendigung des Ausbildungsverhältnisses."},
+  {id:"n15", q:"Wie viele Mindestangaben muss die Vertragsniederschrift enthalten?", o:["Sieben","Acht","Neun","Zehn"], c:2,
+   e:"Neun. Die neunte — der Hinweis auf Tarifverträge — wird am häufigsten vergessen."}
+];
+
+const MC = [
+  {id:"m1", q:"Bis wann muss die Vertragsniederschrift spätestens vorliegen?", o:["Einen Monat vor Ausbildungsbeginn","Unverzüglich nach Vertragsabschluss, spätestens vor Ausbildungsbeginn","Spätestens am ersten Arbeitstag","Vor Ablauf der Probezeit"], c:1,
+   e:"Es gibt keinen festen Vorlauf. Sofort nach der Einigung, und auf jeden Fall bevor der erste Tag anfängt. Das Stichwort heißt „unverzüglich“."},
+  {id:"m2", q:"Welche Angabe gehört NICHT zu den neun Mindestangaben?", o:["Dauer des Urlaubs","Anschrift des Ausbildungsbetriebs","Dauer der Probezeit","Hinweis auf Tarifverträge"], c:1,
+   e:"Der Ausbildungsort steht zwar im Vertragsformular, ist aber keine Mindestangabe. Verwechslungsgefahr mit „Ausbildungsmaßnahmen außerhalb der Ausbildungsstätte“."},
+  {id:"m3", q:"Warum reicht ein per E-Mail unterschriebener Ausbildungsvertrag nicht?", o:["Weil keine Zeugen dabei sind","Weil die elektronische Form ausdrücklich ausgeschlossen ist","Weil die Kammer keine E-Mails annimmt","Weil der Azubi minderjährig sein könnte"], c:1,
+   e:"Das Gesetz verlangt Schriftform und schließt die elektronische Form ausdrücklich aus. Gleiches Prinzip gilt beim Zeugnis und bei der Kündigung."},
+  {id:"m4", q:"Wer muss die Vertragsniederschrift unterschreiben?", o:["Nur Ausbildender und Auszubildender","Ausbildender, Auszubildender und die gesetzlichen Vertreter","Ausbildender und die Kammer","Nur der Ausbildende"], c:1,
+   e:"Alle drei — bei Minderjährigen sind die gesetzlichen Vertreter zwingend dabei. Sie bekommen auch eine eigene Ausfertigung."},
+  {id:"m5", q:"Wer bekommt eine Ausfertigung der unterzeichneten Niederschrift?", o:["Nur der Auszubildende","Auszubildender und gesetzliche Vertreter","Nur die Kammer","Auszubildender, Vertreter und Berufsschule"], c:1,
+   e:"Der Ausbildende muss sie unverzüglich an den Azubi und dessen gesetzliche Vertreter aushändigen."},
+  {id:"m6", q:"Wer kann nach der Probezeit mit vier Wochen Frist kündigen?", o:["Beide Seiten","Nur der Ausbildende","Nur der Auszubildende, wenn er die Ausbildung aufgibt oder wechselt","Niemand"], c:2,
+   e:"Diese Sonderregel gibt es nur für den Azubi. Der Ausbildende kommt nach der Probezeit ausschließlich mit einem wichtigen Grund raus."},
+  {id:"m7", q:"Braucht die Kündigung in der Probezeit eine Begründung?", o:["Ja, immer","Nein, von keiner Seite","Nur vom Ausbildenden","Nur vom Auszubildenden"], c:1,
+   e:"In der Probezeit sind beide Seiten gleichgestellt: jederzeit, ohne Frist, ohne Angabe von Gründen. Schriftform gilt trotzdem."},
+  {id:"m8", q:"Wann endet das Ausbildungsverhältnis bei bestandener Abschlussprüfung?", o:["Zum vereinbarten Vertragsende","Mit Bekanntgabe des Prüfungsergebnisses","Am Monatsende nach der Prüfung","Mit Übergabe des Zeugnisses"], c:1,
+   e:"Mit der Bekanntgabe des Ergebnisses durch den Prüfungsausschuss — auch wenn der Vertrag eigentlich noch länger liefe."},
+  {id:"m9", q:"Die Prüfung ist nicht bestanden. Was passiert mit dem Ausbildungsverhältnis?", o:["Es endet zum Vertragsende","Es verlängert sich automatisch um ein Jahr","Es verlängert sich auf Verlangen des Azubi bis zur nächsten Wiederholungsprüfung","Es verlängert sich, wenn der Betrieb zustimmt"], c:2,
+   e:"Auf Verlangen des Auszubildenden — der Betrieb kann nicht ablehnen, muss aber auch nicht von selbst tätig werden. Maximal ein Jahr."},
+  {id:"m10", q:"Was muss ein einfaches Zeugnis mindestens enthalten?", o:["Führung und Leistung","Art, Dauer und Ziel der Ausbildung sowie erworbene Fertigkeiten, Kenntnisse und Fähigkeiten","Eine Gesamtnote","Die Fehlzeiten"], c:1,
+   e:"Führung, Leistung und besondere fachliche Fähigkeiten kommen nur auf Verlangen dazu — das ist dann das qualifizierte Zeugnis."},
+  {id:"m11", q:"Wer muss das Berichtsheft aushändigen und durchsehen?", o:["Der Auszubildende","Der Ausbildende","Die Berufsschule","Die Kammer"], c:1,
+   e:"Führen muss es der Azubi — während der Ausbildungszeit. Kostenlos aushändigen, Gelegenheit geben und regelmäßig durchsehen muss der Ausbildende."},
+  {id:"m12", q:"Welche dieser Vereinbarungen ist wirksam?", o:["Vertragsstrafe bei vorzeitiger Kündigung","Wettbewerbsverbot für zwei Jahre nach der Ausbildung","Entschädigung für die Ausbildung selbst","Ein Urlaubsanspruch über dem gesetzlichen Minimum"], c:3,
+   e:"Zugunsten des Azubi darf immer abgewichen werden. Die anderen drei sind nichtig."},
+  {id:"m13", q:"Ein Azubi wird nach der Probezeit gekündigt. Was muss in der Kündigung stehen?", o:["Nichts weiter","Die Kündigungsgründe","Eine Frist von vier Wochen","Der Hinweis auf die Kammer"], c:1,
+   e:"Nach der Probezeit gilt: schriftlich und unter Angabe der Kündigungsgründe."},
+  {id:"m14", q:"Der Ausbildende bildet nicht selbst aus. Wer unterschreibt das Zeugnis?", o:["Nur der Ausbilder","Der Ausbildende; der Ausbilder soll mitunterschreiben","Die Kammer","Der Betriebsrat"], c:1,
+   e:"Unterschreiben muss der Ausbildende. Hat er nicht selbst ausgebildet, soll auch der Ausbilder unterzeichnen."},
+  {id:"m15", q:"Welche Pflicht trifft den Ausbildenden in Bezug auf die Berufsschule?", o:["Er darf den Besuch bei betrieblichem Bedarf aussetzen","Er muss zum Besuch anhalten und freistellen","Er muss nur bei Minderjährigen freistellen","Er muss den Unterricht nachholen lassen"], c:1,
+   e:"Anhalten und freistellen — beides. Keine Ausnahme bei Auftragsspitzen, keine Ausnahme mit Einverständnis des Azubi."},
+  {id:"m16", q:"Eine Kündigung aus wichtigem Grund nach der Probezeit ist …", o:["fristlos","mit vier Wochen Frist","zum Monatsende","mit zwei Wochen Frist"], c:0,
+   e:"Fristlos. Die einzige Kündigung mit Frist nach der Probezeit sind die vier Wochen des Azubi bei Berufswechsel oder Aufgabe."},
+  {id:"m17", q:"Was gilt für die Ausbildungsvergütung?", o:["Sie ist frei verhandelbar","Sie muss angemessen sein und mindestens jährlich ansteigen","Sie darf bei schlechter Leistung gekürzt werden","Sie wird von der Kammer festgelegt"], c:1,
+   e:"Angemessen, mindestens jährlich ansteigend, und es gibt eine gesetzliche Mindestvergütung. Eine Kürzung als Sanktion ist unzulässig."},
+  {id:"m18", q:"Der Azubi ist minderjährig. Was ist beim Vertragsschluss zusätzlich nötig?", o:["Eine Bestätigung der Berufsschule","Die schriftliche Zustimmung der gesetzlichen Vertreter","Eine Genehmigung des Jugendamts","Nichts Zusätzliches"], c:1,
+   e:"Schriftliche Zustimmung der gesetzlichen Vertreter — das müssen nicht zwingend die Eltern sein, es kann auch ein Vormund sein."},
+  {id:"m19", q:"Welche Aufgaben darf der Ausbildende dem Azubi übertragen?", o:["Alle im Betrieb anfallenden","Nur solche, die dem Ausbildungszweck dienen und den Kräften angemessen sind","Alle, solange sie bezahlt werden","Alle, solange der Azubi zustimmt"], c:1,
+   e:"Beide Bedingungen müssen erfüllt sein. Zustimmung des Azubi heilt eine unzulässige Aufgabe nicht."},
+  {id:"m20", q:"Fachinformatiker dauert regulär drei Jahre. Im Vertrag stehen vier. Was gilt?", o:["Vier Jahre, weil vereinbart","Drei Jahre — die Ausbildungsordnung gibt die Dauer vor","Der Azubi darf wählen","Die Kammer entscheidet"], c:1,
+   e:"Die Ausbildungsdauer richtet sich nach der Ausbildungsordnung. Verlängert werden kann nur in bestimmten Fällen auf Antrag, verkürzt bei Vorbildung."}
+];
+
+const FLIPS = [
+  {id:"f1", front:"Vertragsniederschrift — wann, wie, wer?",
+   back:["<b>Wann:</b> unverzüglich nach Vertragsabschluss, spätestens vor Beginn der Ausbildung.",
+         "<b>Wie:</b> schriftlich. Elektronische Form ausgeschlossen.",
+         "<b>Wer unterschreibt:</b> Ausbildender, Auszubildender, gesetzliche Vertreter.",
+         "<b>Ausfertigung:</b> unverzüglich an Azubi und gesetzliche Vertreter."]},
+  {id:"f2", front:"Pflichten des Ausbildenden — die sieben Kernpunkte",
+   back:["Ausbildungsziel vermitteln, geordnet nach sachlicher und zeitlicher Gliederung",
+         "Selbst ausbilden oder einen geeigneten Ausbilder ausdrücklich bestellen",
+         "Ausbildungsmittel kostenlos stellen — Werkzeug, Werkstoffe, Fachliteratur",
+         "Zur Berufsschule anhalten und dafür freistellen",
+         "Berichtsheft kostenlos aushändigen, Zeit dafür geben, durchsehen",
+         "Sorgepflicht: charakterlich fördern, weder sittlich noch körperlich gefährden",
+         "Nur ausbildungsbezogene und kräfteangemessene Aufgaben übertragen"]},
+  {id:"f3", front:"Pflichten des Auszubildenden — die sieben Kernpunkte",
+   back:["Lernpflicht: übertragene Aufgaben sorgfältig ausführen",
+         "An Berufsschule, Prüfungen und außerbetrieblichen Maßnahmen teilnehmen",
+         "Weisungen weisungsberechtigter Personen befolgen",
+         "Betriebliche Ordnung beachten",
+         "Werkzeuge, Maschinen und Einrichtungen pfleglich behandeln",
+         "Betriebs- und Geschäftsgeheimnisse wahren",
+         "Berichtsheft führen und regelmäßig vorlegen"]},
+  {id:"f4", front:"Probezeit — die Eckwerte",
+   back:["Jedes Berufsausbildungsverhältnis beginnt mit einer Probezeit.",
+         "<b>Mindestens 1 Monat, höchstens 4 Monate.</b>",
+         "Unterbrechung um mehr als ein Drittel verlängert die Probezeit entsprechend.",
+         "In der Probezeit: beide Seiten jederzeit, fristlos, ohne Grundangabe — aber schriftlich."]},
+  {id:"f5", front:"Kündigung nach der Probezeit — wer darf was?",
+   back:["<b>Ausbildender:</b> nur aus wichtigem Grund, fristlos.",
+         "<b>Auszubildender:</b> aus wichtigem Grund fristlos — <b>oder</b> mit 4 Wochen Frist, wenn er die Ausbildung aufgibt oder sich für eine andere Berufstätigkeit ausbilden lassen will.",
+         "Immer schriftlich und unter Angabe der Gründe.",
+         "Fristlos nur innerhalb von 2 Wochen ab Kenntnis des Grundes."]},
+  {id:"f6", front:"Was ist ein „wichtiger Grund“?",
+   back:["Ein Verhalten, das die Fortsetzung bis zum Ausbildungsende unzumutbar macht.",
+         "Typisch: Diebstahl, Gewalt, sexuelle Belästigung, beharrliche Arbeitsverweigerung, längeres unentschuldigtes Fehlen.",
+         "Bei Verhaltensverstößen in der Regel erst Abmahnung.",
+         "Auftragsmangel oder „passt nicht“ ist <b>kein</b> wichtiger Grund — das wirtschaftliche Risiko trägt der Betrieb."]},
+  {id:"f7", front:"Vergütung — was musst du wissen?",
+   back:["Angemessen und mindestens einmal jährlich ansteigend.",
+         "Gesetzliche Mindestvergütung; bei Ausbildungsbeginn 2026: <b>724 €</b> im ersten Jahr.",
+         "Fällig spätestens am <b>letzten Arbeitstag</b> des Monats.",
+         "Fortzahlung bei Freistellung und bis zu 6 Wochen bei unverschuldeter Krankheit.",
+         "Keine Kürzung als Strafe."]},
+  {id:"f8", front:"Zeugnis — Inhalt und Form",
+   back:["<b>Form:</b> schriftlich, elektronische Form ausgeschlossen.",
+         "<b>Einfaches Zeugnis:</b> Art, Dauer und Ziel der Ausbildung sowie erworbene Fertigkeiten, Kenntnisse und Fähigkeiten.",
+         "<b>Qualifiziertes Zeugnis</b> auf Verlangen: zusätzlich Führung, Leistung und besondere fachliche Fähigkeiten.",
+         "Unterschrift des Ausbildenden; hat er nicht selbst ausgebildet, soll der Ausbilder mitunterschreiben."]},
+  {id:"f9", front:"Prüfung nicht bestanden — was jetzt?",
+   back:["<b>Zweimal</b> wiederholbar.",
+         "Das Ausbildungsverhältnis verlängert sich <b>auf Verlangen des Auszubildenden</b> bis zur nächstmöglichen Wiederholungsprüfung.",
+         "<b>Höchstens um ein Jahr.</b>",
+         "Nicht automatisch — der Azubi muss es verlangen, der Betrieb kann es nicht verweigern."]},
+  {id:"f10", front:"Nichtige Vereinbarungen im Ausbildungsvertrag",
+   back:["Entschädigung für die Berufsausbildung selbst",
+         "Vertragsstrafen",
+         "Ausschluss oder Beschränkung von Schadensersatzansprüchen",
+         "Pauschalierter Schadensersatz",
+         "Beschränkung der beruflichen Tätigkeit nach der Ausbildung (Wettbewerbsverbot) — Ausnahme: Übernahme in den letzten 6 Monaten vereinbart"]},
+  {id:"f11", front:"Urlaub — die Staffel",
+   back:["<b>Volljährig:</b> mindestens 24 Werktage (Sechs-Tage-Woche).",
+         "<b>Minderjährig</b>, maßgeblich ist das Alter zu Beginn des Kalenderjahres:",
+         "noch nicht 16 → 30 Werktage",
+         "noch nicht 17 → 27 Werktage",
+         "noch nicht 18 → 25 Werktage",
+         "Urlaub soll zusammenhängend und in den Berufsschulferien gegeben werden."]},
+  {id:"f12", front:"Arbeitszeit — was gilt für Minderjährige?",
+   back:["<b>8 Stunden</b> täglich, <b>40 Stunden</b> wöchentlich.",
+         "Pausen: 30 Minuten bei 4,5–6 Stunden, <b>60 Minuten bei über 6 Stunden</b>.",
+         "Berufsschulzeit wird auf die Arbeitszeit angerechnet.",
+         "Erwachsene: 8 Stunden, ausnahmsweise 10 mit Ausgleich."]},
+  {id:"f13", front:"Wann endet das Ausbildungsverhältnis?",
+   back:["Mit Ablauf der vereinbarten Ausbildungszeit.",
+         "Bei bestandener Prüfung schon vorher — <b>mit Bekanntgabe des Ergebnisses</b> durch den Prüfungsausschuss.",
+         "Durch Kündigung (Probezeit / wichtiger Grund / 4 Wochen beim Azubi).",
+         "Durch Aufhebungsvertrag."]},
+  {id:"f14", front:"Ärztliche Untersuchung bei Minderjährigen",
+   back:["<b>Erstuntersuchung</b> vor Beginn der Ausbildung, Bescheinigung muss vorliegen.",
+         "<b>Nachuntersuchung</b> vor Ablauf des ersten Ausbildungsjahres.",
+         "Ohne Erstuntersuchung darf der Minderjährige nicht beschäftigt werden.",
+         "Kopie geht mit dem Eintragungsantrag an die Kammer."]},
+  {id:"f15", front:"Rolle der Kammer (IHK / HWK / Handelskammer)",
+   back:["Führt das Verzeichnis der Berufsausbildungsverhältnisse.",
+         "Der Ausbildende muss die Eintragung unverzüglich nach Vertragsabschluss beantragen.",
+         "Wesentliche Vertragsänderungen sind unverzüglich anzuzeigen.",
+         "Überwacht die Eignung von Ausbildungsstätte und Ausbilder, nimmt die Prüfungen ab."]}
+];
+
+const RECALLS = [
+  {id:"r1", q:"Die neun Mindestangaben der Vertragsniederschrift",
+   hint:"Der Reihe nach: was und wie lange, wo und wie viel pro Tag, Probezeit, Geld, Urlaub, Kündigung, Tarif.",
+   items:[
+     "Art, sachliche und zeitliche Gliederung sowie Ziel der Ausbildung — insbesondere die Berufstätigkeit",
+     "Beginn und Dauer der Berufsausbildung",
+     "Ausbildungsmaßnahmen außerhalb der Ausbildungsstätte",
+     "Dauer der regelmäßigen täglichen Ausbildungszeit",
+     "Dauer der Probezeit",
+     "Zahlung und Höhe der Vergütung",
+     "Dauer des Urlaubs",
+     "Voraussetzungen, unter denen gekündigt werden kann",
+     "Hinweis in allgemeiner Form auf Tarifverträge, Betriebs- oder Dienstvereinbarungen"]},
+  {id:"r2", q:"Pflichten des Ausbildenden",
+   hint:"Sieben Stück — von „Ziel vermitteln“ bis „nicht gefährden“.",
+   items:[
+     "Ausbildungsziel vermitteln, geordnet nach der sachlichen und zeitlichen Gliederung",
+     "Selbst ausbilden oder einen geeigneten Ausbilder ausdrücklich bestellen",
+     "Ausbildungsmittel kostenlos zur Verfügung stellen",
+     "Zum Besuch der Berufsschule anhalten und freistellen",
+     "Berichtsheft kostenlos aushändigen, Zeit dafür geben, durchsehen",
+     "Sorgepflicht: charakterlich fördern, sittlich und körperlich nicht gefährden",
+     "Nur Aufgaben übertragen, die dem Ausbildungszweck dienen und den Kräften angemessen sind"]},
+  {id:"r3", q:"Pflichten des Auszubildenden",
+   hint:"Sieben Stück — Lernen, Schule, Weisungen, Ordnung, Werkzeug, Geheimnisse, Berichtsheft.",
+   items:[
+     "Lernpflicht — übertragene Aufgaben sorgfältig ausführen",
+     "An Berufsschulunterricht, Prüfungen und außerbetrieblichen Maßnahmen teilnehmen",
+     "Weisungen weisungsberechtigter Personen befolgen",
+     "Die betriebliche Ordnung beachten",
+     "Werkzeuge, Maschinen und Einrichtungen pfleglich behandeln",
+     "Betriebs- und Geschäftsgeheimnisse wahren",
+     "Berichtsheft führen und regelmäßig vorlegen"]},
+  {id:"r4", q:"Nichtige Vereinbarungen im Ausbildungsvertrag",
+   hint:"Fünf Stück — alles, was den Azubi finanziell oder beruflich fesselt.",
+   items:[
+     "Entschädigung für die Berufsausbildung",
+     "Vertragsstrafen",
+     "Ausschluss oder Beschränkung von Schadensersatzansprüchen",
+     "Pauschalierter Schadensersatz",
+     "Beschränkung der beruflichen Tätigkeit nach Ende der Ausbildung"]},
+  {id:"r5", q:"Fehler im Musterausbildungsvertrag (Abschnitte A–H)",
+   hint:"Denk an das Formular der Handelskammer aus eurem Zettel.",
+   items:[
+     "Berufsbezeichnung ohne Fachrichtung — die Fachrichtung gehört zwingend dazu",
+     "A: Ausbildungsdauer 4 Jahre statt 3 laut Ausbildungsordnung; Ende damit 31.07.2029",
+     "B: Probezeit 7 Monate — zulässig sind höchstens 4",
+     "C: Ausbildungsstätte ohne Anschrift des Betriebs",
+     "D: Ausbildungsmaßnahmen außerhalb der Ausbildungsstätte fehlen (Berufsschule)",
+     "E: Vergütung steigt nicht jährlich an und liegt teils unter der Mindestvergütung",
+     "F: 9,5 Stunden tägliche Ausbildungszeit — zulässig sind 8",
+     "G: Urlaub zu niedrig angesetzt",
+     "H: Ort und Datum fehlen, Unterschrift der gesetzlichen Vertreter fehlt"]}
+];
+
+const MATRIX = {
+  opts:[
+    "Jederzeit, fristlos, ohne Angabe von Gründen",
+    "Nur aus wichtigem Grund, fristlos",
+    "Wichtiger Grund (fristlos) oder 4 Wochen Frist bei Aufgabe/Berufswechsel",
+    "Mit 4 Wochen Frist, ohne Angabe von Gründen"
+  ],
+  cells:[
+    {id:"mx1", row:"Probezeit", col:"Ausbildender", c:0, e:"In der Probezeit sind beide Seiten gleichgestellt. Kein Grund nötig — Schriftform trotzdem."},
+    {id:"mx2", row:"Probezeit", col:"Auszubildender", c:0, e:"Genau wie beim Ausbildenden: jederzeit, fristlos, ohne Grund."},
+    {id:"mx3", row:"Danach", col:"Ausbildender", c:1, e:"Nach der Probezeit kommt der Ausbildende nur noch mit einem wichtigen Grund raus. Eine ordentliche Kündigung hat er nicht."},
+    {id:"mx4", row:"Danach", col:"Auszubildender", c:2, e:"Der Azubi hat mehr Rechte: wichtiger Grund fristlos — oder 4 Wochen, wenn er die Ausbildung aufgibt oder wechselt."}
+  ]
+};
+
+/* ============================================================
+   STATE
+   ============================================================ */
+const KEY="bbig.lern.v1";
+let store={stats:{},done:{}};
+try{ const raw=localStorage.getItem(KEY); if(raw) store=Object.assign(store,JSON.parse(raw)); }catch(e){}
+function save(){ try{ localStorage.setItem(KEY,JSON.stringify(store)); }catch(e){} }
+function mark(id,ok){
+  const s=store.stats[id]||{seen:0,wrong:0,ok:0};
+  s.seen++; if(ok) s.ok++; else s.wrong++;
+  store.stats[id]=s; save();
+}
+function weakIds(){
+  return Object.keys(store.stats).filter(k=>{
+    const s=store.stats[k]; return s.wrong>0 && s.wrong>=s.ok;
+  });
+}
+const app=document.getElementById("app");
+const actions=document.getElementById("actions");
+const actionsIn=document.getElementById("actionsIn");
+function setActions(html){ if(!html){actions.classList.add("hidden");actionsIn.innerHTML="";return;} actions.classList.remove("hidden"); actionsIn.innerHTML=html; }
+function esc(s){return String(s).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+/* ============================================================
+   HOME
+   ============================================================ */
+const MODES=[
+  {k:"A", id:"quick", t:"Schnellcheck", d:"12 gemischte Fragen quer durch alles"},
+  {k:"B", id:"cards", t:"Karteikarten", d:"Kernaussagen aufdecken und selbst bewerten"},
+  {k:"C", id:"cases", t:"Fälle entscheiden", d:"Zulässig oder nicht — mit Begründung"},
+  {k:"D", id:"nums",  t:"Zahlen und Fristen", d:"Schnellfeuer auf Probezeit, Fristen, Urlaub"},
+  {k:"E", id:"lists", t:"Listen aufsagen", d:"Die neun Pflichtangaben und die Pflichtenkataloge"},
+  {k:"F", id:"matrix",t:"Kündigungs-Matrix", d:"Wer darf wann wie kündigen"},
+  {k:"G", id:"cheat", t:"Spickzettel", d:"Alles Wichtige auf einem Blatt"}
+];
+
+function home(){
+  setActions("");
+  const total=Object.keys(store.stats).length;
+  const allAns=Object.values(store.stats).reduce((a,s)=>a+s.seen,0);
+  const okAns=Object.values(store.stats).reduce((a,s)=>a+s.ok,0);
+  const quote=allAns?Math.round(okAns/allAns*100):0;
+  const weak=weakIds().length;
+
+  let secs=MODES.map(m=>`
+    <button class="sec" data-go="${m.id}">
+      <span class="sec-letter">${m.k}</span>
+      <span class="sec-body"><h2>${m.t}</h2><p>${m.d}</p></span>
+      <span class="sec-state"><span class="tick ${store.done[m.id]?"on":""}">${store.done[m.id]?"✓":""}</span></span>
+    </button>`).join("");
+
+  if(weak>0){
+    secs+=`
+    <button class="sec weak" data-go="weak">
+      <span class="sec-letter">!</span>
+      <span class="sec-body"><h2>Schwachstellen</h2><p>${weak} Frage${weak===1?"":"n"}, die du zuletzt falsch hattest</p></span>
+      <span class="sec-state"></span>
+    </button>`;
+  }
+
+  app.innerHTML=`<div class="wrap">
+    <div class="masthead">
+      <div class="masthead-top">
+        <div class="mark">§</div>
+        <div class="masthead-title">
+          <h1>Berufsbildungsgesetz</h1>
+          <p>Klausurvorbereitung WiPo — Ausbildungsvertrag, Rechte und Pflichten, Kündigung</p>
+        </div>
+      </div>
+      <div class="masthead-meta">
+        <div class="meta-cell"><span class="k">Beantwortet</span><span class="v">${allAns}</span></div>
+        <div class="meta-cell"><span class="k">Trefferquote</span><span class="v">${allAns?quote+"%":"—"}</span></div>
+        <div class="meta-cell"><span class="k">Offen</span><span class="v">${weak}</span></div>
+      </div>
+    </div>
+    <div class="sectionlist">${secs}</div>
+    <p class="note">Dein Fortschritt bleibt auf diesem Gerät gespeichert. Wer den Link teilt, lernt auf seinem eigenen Handy mit eigenem Stand.
+    <br><button class="linkbtn" id="reset">Fortschritt zurücksetzen</button></p>
+  </div>`;
+
+  app.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>route(b.dataset.go));
+  document.getElementById("reset").onclick=()=>{
+    if(confirm("Fortschritt auf diesem Gerät löschen?")){ store={stats:{},done:{}}; save(); home(); }
+  };
+  window.scrollTo(0,0);
+}
+
+function route(id){
+  if(id==="cheat") return cheat();
+  if(id==="matrix") return matrixMode();
+  if(id==="lists") return session(shuffle(RECALLS).map(r=>({...r,type:"recall"})),"Listen aufsagen","lists");
+  if(id==="cards") return session(shuffle(FLIPS).map(f=>({...f,type:"flip"})),"Karteikarten","cards");
+  if(id==="cases") return session(shuffle(CASES).map(c=>({...c,type:"case"})),"Fälle entscheiden","cases");
+  if(id==="nums")  return session(shuffle(NUMBERS).map(n=>({...n,type:"mc"})),"Zahlen und Fristen","nums");
+  if(id==="quick"){
+    const pool=[...MC.map(x=>({...x,type:"mc"})),...NUMBERS.map(x=>({...x,type:"mc"})),...CASES.map(x=>({...x,type:"case"}))];
+    const w=weakIds();
+    const weakFirst=pool.filter(x=>w.includes(x.id));
+    const rest=shuffle(pool.filter(x=>!w.includes(x.id)));
+    return session([...shuffle(weakFirst).slice(0,5),...rest].slice(0,12),"Schnellcheck","quick");
+  }
+  if(id==="weak"){
+    const w=weakIds();
+    const pool=[...MC.map(x=>({...x,type:"mc"})),...NUMBERS.map(x=>({...x,type:"mc"})),
+                ...CASES.map(x=>({...x,type:"case"})),...MATRIX.cells.map(x=>({...x,type:"mxq"}))];
+    const items=pool.filter(x=>w.includes(x.id));
+    if(!items.length) return home();
+    return session(shuffle(items),"Schwachstellen","weak");
+  }
+}
+
+/* ============================================================
+   SESSION-ENGINE
+   ============================================================ */
+let S=null;
+
+function session(items,title,modeId){
+  S={items,i:0,title,modeId,right:0,wrong:[],answered:false};
+  renderItem();
+}
+
+function header(){
+  const pct=Math.round(S.i/S.items.length*100);
+  return `<div class="bar"><div class="bar-in">
+      <button class="back" id="back">Zurück</button>
+      <span class="bar-title">${esc(S.title)}</span>
+      <span class="bar-count">${S.i+1} / ${S.items.length}</span>
+    </div><div class="pbar"><i style="width:${pct}%"></i></div></div>`;
+}
+
+function renderItem(){
+  const it=S.items[S.i];
+  S.answered=false;
+  if(it.type==="mc") return renderMC(it);
+  if(it.type==="case") return renderCase(it);
+  if(it.type==="flip") return renderFlip(it);
+  if(it.type==="recall") return renderRecall(it);
+  if(it.type==="mxq") return renderMxq(it);
+}
+
+function bindBack(){ const b=document.getElementById("back"); if(b) b.onclick=home; window.scrollTo(0,0); }
+
+function nextBtn(label){
+  setActions(`<button class="btn" id="next">${label||"Weiter"}</button>`);
+  document.getElementById("next").onclick=advance;
+}
+function advance(){
+  S.i++;
+  if(S.i>=S.items.length) return finish();
+  renderItem();
+}
+
+/* --- Multiple Choice --- */
+function renderMC(it){
+  const order=shuffle(it.o.map((t,idx)=>({t,idx})));
+  app.innerHTML=header()+`<div class="wrap">
+    <div class="card">
+      <p class="q">${esc(it.q)}</p>
+      <div class="opts" id="opts">${order.map((o,i)=>
+        `<button class="opt" data-idx="${o.idx}"><span class="let">${"ABCD"[i]}</span><span>${esc(o.t)}</span></button>`).join("")}</div>
+      <div id="fb"></div>
+    </div>
+  </div>`;
+  bindBack(); setActions("");
+  app.querySelectorAll(".opt").forEach(b=>{
+    b.onclick=()=>{
+      if(S.answered) return; S.answered=true;
+      const chosen=+b.dataset.idx, ok=chosen===it.c;
+      app.querySelectorAll(".opt").forEach(x=>{
+        x.disabled=true;
+        const xi=+x.dataset.idx;
+        if(xi===it.c) x.classList.add("right");
+        else if(xi===chosen) x.classList.add("wrong");
+        else x.classList.add("dim");
+      });
+      mark(it.id,ok);
+      if(ok) S.right++; else S.wrong.push({q:it.q,a:it.o[it.c],e:it.e});
+      document.getElementById("fb").innerHTML=verdictBox(ok, ok?"Richtig":"Falsch", it.e, ok?null:("Richtig wäre: "+esc(it.o[it.c])));
+      nextBtn();
+      document.getElementById("fb").scrollIntoView({behavior:"smooth",block:"nearest"});
+    };
+  });
+}
+
+function verdictBox(ok,stamp,text,extra){
+  return `<div class="verdict ${ok?"ok":"no"}">
+    <p class="vh"><span class="stamp">${esc(stamp)}</span></p>
+    ${extra?`<p><b>${extra}</b></p>`:""}
+    <p>${esc(text)}</p>
+  </div>`;
+}
+
+/* --- Fall --- */
+function renderCase(it){
+  app.innerHTML=header()+`<div class="wrap">
+    <div class="card">
+      <p class="eyebrow">Beurteile den Fall</p>
+      <p class="fall">${esc(it.t)}</p>
+      <div class="opts" id="opts">
+        <button class="opt" data-v="1"><span class="let">A</span><span>Rechtlich in Ordnung</span></button>
+        <button class="opt" data-v="0"><span class="let">B</span><span>Nicht in Ordnung</span></button>
+      </div>
+      <div id="fb"></div>
+    </div>
+  </div>`;
+  bindBack(); setActions("");
+  app.querySelectorAll(".opt").forEach(b=>{
+    b.onclick=()=>{
+      if(S.answered) return; S.answered=true;
+      const chose = b.dataset.v==="1";
+      const ok = chose===it.ok;
+      app.querySelectorAll(".opt").forEach(x=>{
+        x.disabled=true;
+        const v=x.dataset.v==="1";
+        if(v===it.ok) x.classList.add("right");
+        else if(x===b) x.classList.add("wrong");
+        else x.classList.add("dim");
+      });
+      mark(it.id,ok);
+      if(ok) S.right++; else S.wrong.push({q:it.t,a:it.w,e:it.e});
+      document.getElementById("fb").innerHTML=
+        `<div class="verdict ${ok?"ok":"no"}">
+          <p class="vh"><span class="stamp">${ok?"Richtig":"Falsch"}</span> ${esc(it.w)}</p>
+          <p>${esc(it.e)}</p>
+          <span class="law">${esc(it.l)}</span>
+        </div>`;
+      nextBtn();
+      document.getElementById("fb").scrollIntoView({behavior:"smooth",block:"nearest"});
+    };
+  });
+}
+
+/* --- Karteikarte --- */
+function renderFlip(it){
+  app.innerHTML=header()+`<div class="wrap">
+    <div class="card">
+      <p class="eyebrow">Karteikarte</p>
+      <div class="flipface">${esc(it.front)}</div>
+      <div id="bk"></div>
+    </div>
+  </div>`;
+  bindBack();
+  setActions(`<button class="btn" id="flip">Antwort zeigen</button>`);
+  document.getElementById("flip").onclick=()=>{
+    document.getElementById("bk").innerHTML=
+      `<div class="flipback"><ul>${it.back.map(b=>`<li>${b}</li>`).join("")}</ul></div>`;
+    setActions(`<button class="btn ghost" id="no">Nochmal üben</button><button class="btn" id="yes">Wusste ich</button>`);
+    document.getElementById("yes").onclick=()=>{mark(it.id,true);S.right++;advance();};
+    document.getElementById("no").onclick=()=>{mark(it.id,false);S.wrong.push({q:it.front,a:"Selbst als unsicher markiert",e:it.back.join(" · ").replace(/<[^>]+>/g,"")});advance();};
+  };
+}
+
+/* --- Recall --- */
+function renderRecall(it){
+  let shown=0, hits=0;
+  app.innerHTML=header()+`<div class="wrap">
+    <div class="card">
+      <p class="eyebrow">Sag alle Punkte laut auf, dann deck sie einzeln auf</p>
+      <p class="q small">${esc(it.q)}</p>
+      <p class="eyebrow" style="margin-top:8px">${esc(it.hint)}</p>
+      <ul class="slots" id="slots">${it.items.map((x,i)=>
+        `<li data-i="${i}"><span class="n">${i+1}</span><span class="txt">—</span></li>`).join("")}</ul>
+      <div id="sc"></div>
+    </div>
+  </div>`;
+  bindBack();
+  const slots=document.getElementById("slots");
+  const sc=document.getElementById("sc");
+
+  function step(){
+    if(shown>=it.items.length){
+      const ok = hits >= Math.ceil(it.items.length*0.7);
+      mark(it.id,ok);
+      if(ok) S.right++; else S.wrong.push({q:it.q,a:hits+" von "+it.items.length+" gewusst",e:it.items.join(" · ")});
+      sc.innerHTML=`<div class="verdict ${ok?"ok":"no"}">
+        <p class="vh"><span class="stamp">${hits} von ${it.items.length}</span></p>
+        <p>${ok?"Sitzt gut. Die fehlenden Punkte kommen im Schwachstellen-Modus wieder.":"Noch nicht sicher. Lies die Liste einmal von oben nach unten durch und wiederhole sie später."}</p>
+      </div>`;
+      nextBtn();
+      return;
+    }
+    const li=slots.querySelector(`[data-i="${shown}"]`);
+    li.classList.add("shown");
+    li.querySelector(".txt").textContent=it.items[shown];
+    sc.innerHTML=`<div class="selfcheck">
+      <button class="no" id="miss">Hatte ich nicht</button>
+      <button class="yes" id="hit">Hatte ich</button></div>`;
+    document.getElementById("hit").onclick=()=>{li.classList.add("hit");hits++;shown++;step();};
+    document.getElementById("miss").onclick=()=>{li.classList.add("miss");shown++;step();};
+    li.scrollIntoView({behavior:"smooth",block:"center"});
+  }
+  setActions(`<button class="btn" id="go">Ersten Punkt aufdecken</button>`);
+  document.getElementById("go").onclick=()=>{setActions("");step();};
+}
+
+/* --- einzelne Matrix-Frage (im Schwachstellen-Modus) --- */
+function renderMxq(it){
+  renderMC({id:it.id, q:`Kündigung — ${it.row}, Seite: ${it.col}. Was gilt?`, o:MATRIX.opts, c:it.c, e:it.e});
+}
+
+/* ============================================================
+   MATRIX-MODUS
+   ============================================================ */
+function matrixMode(){
+  const picked={};
+  S={items:[],i:0,title:"Kündigungs-Matrix",modeId:"matrix",right:0,wrong:[]};
+  function draw(active){
+    const cell=(k)=>{
+      const c=MATRIX.cells.find(x=>x.id===k);
+      const p=picked[k];
+      const cls=p==null?"empty":(p===c.c?"right":"wrong");
+      const txt=p==null?"Antippen":MATRIX.opts[p];
+      return `<button class="mcell ${cls}" data-cell="${k}">${esc(txt)}</button>`;
+    };
+    app.innerHTML=`<div class="bar"><div class="bar-in">
+        <button class="back" id="back">Zurück</button>
+        <span class="bar-title">Kündigungs-Matrix</span>
+        <span class="bar-count">${Object.keys(picked).length} / 4</span>
+      </div><div class="pbar"><i style="width:${Object.keys(picked).length/4*100}%"></i></div></div>
+    <div class="wrap">
+      <div class="card">
+        <p class="eyebrow">Tipp jedes Feld an und wähle, was dort gilt</p>
+        <div class="matrix">
+          <div class="mrow head"><div class="mcell"></div><div class="mcell">Ausbildender</div><div class="mcell">Auszubildender</div></div>
+          <div class="mrow"><div class="mcell rowlab">In der Probezeit</div>${cell("mx1")}${cell("mx2")}</div>
+          <div class="mrow"><div class="mcell rowlab">Nach der Probezeit</div>${cell("mx3")}${cell("mx4")}</div>
+        </div>
+        <div id="pick"></div>
+      </div>
+    </div>`;
+    document.getElementById("back").onclick=home;
+    app.querySelectorAll("[data-cell]").forEach(b=>b.onclick=()=>openPicker(b.dataset.cell));
+    if(Object.keys(picked).length===4){
+      const allOk=MATRIX.cells.every(c=>picked[c.id]===c.c);
+      document.getElementById("pick").innerHTML=
+        `<div class="verdict ${allOk?"ok":"no"}">
+          <p class="vh"><span class="stamp">${MATRIX.cells.filter(c=>picked[c.id]===c.c).length} von 4</span></p>
+          <p>Merksatz: In der Probezeit sind beide gleichgestellt und keiner braucht einen Grund. Nach der Probezeit hat der Azubi mehr Rechte als der Chef — der kommt nur noch mit einem wichtigen Grund raus.</p>
+          <p>Form: immer schriftlich. Begründung: erst nach der Probezeit.</p>
+        </div>`;
+      store.done.matrix=true; save();
+      setActions(`<button class="btn ghost" id="again">Nochmal</button><button class="btn" id="hm">Fertig</button>`);
+      document.getElementById("again").onclick=()=>{for(const k in picked) delete picked[k]; draw();};
+      document.getElementById("hm").onclick=home;
+    } else setActions("");
+    window.scrollTo(0,0);
+  }
+  function openPicker(k){
+    const c=MATRIX.cells.find(x=>x.id===k);
+    const box=document.getElementById("pick");
+    box.innerHTML=`<div class="picker">
+      <h3>${esc(c.row)} — ${esc(c.col)}</h3>
+      <div class="opts">${MATRIX.opts.map((t,i)=>
+        `<button class="opt" data-o="${i}"><span class="let">${"ABCD"[i]}</span><span>${esc(t)}</span></button>`).join("")}</div>
+    </div>`;
+    box.scrollIntoView({behavior:"smooth",block:"nearest"});
+    box.querySelectorAll("[data-o]").forEach(b=>b.onclick=()=>{
+      const v=+b.dataset.o;
+      picked[k]=v;
+      mark(c.id, v===c.c);
+      draw();
+      if(v!==c.c){
+        const p=document.getElementById("pick");
+        if(Object.keys(picked).length<4) p.innerHTML=`<div class="verdict no"><p class="vh"><span class="stamp">Falsch</span></p><p>${esc(c.e)}</p></div>`;
+      }
+    });
+  }
+  draw();
+}
+
+/* ============================================================
+   ERGEBNIS
+   ============================================================ */
+function finish(){
+  store.done[S.modeId]=true; save();
+  const n=S.items.length, r=S.right;
+  const pct=Math.round(r/n*100);
+  let urteil;
+  if(pct>=90) urteil="Das sitzt. Nimm dir als Nächstes die Fälle oder den Spickzettel vor.";
+  else if(pct>=70) urteil="Solide Basis. Geh die falschen Punkte unten durch, die kommen im Schwachstellen-Modus wieder.";
+  else urteil="Noch wackelig. Lies den Spickzettel einmal komplett und starte die Runde danach neu.";
+
+  app.innerHTML=`<div class="bar"><div class="bar-in">
+      <button class="back" id="back">Zurück</button>
+      <span class="bar-title">${esc(S.title)} — Ergebnis</span>
+    </div><div class="pbar"><i style="width:100%"></i></div></div>
+  <div class="wrap">
+    <div class="card">
+      <p class="eyebrow">Ergebnis</p>
+      <p class="score">${r}<small> / ${n}</small></p>
+      <p style="margin:10px 0 0;font-size:15px;line-height:1.5">${urteil}</p>
+    </div>
+    ${S.wrong.length?`<div class="reviewlist">${S.wrong.map(w=>
+      `<div class="rev"><p class="rq">${esc(w.q)}</p><p class="ra">${esc(w.a)}</p><p class="ra" style="margin-top:5px">${esc(w.e)}</p></div>`
+    ).join("")}</div>`:""}
+  </div>`;
+  document.getElementById("back").onclick=home;
+  setActions(`<button class="btn ghost" id="again">Nochmal</button><button class="btn" id="hm">Übersicht</button>`);
+  document.getElementById("again").onclick=()=>route(S.modeId);
+  document.getElementById("hm").onclick=home;
+  window.scrollTo(0,0);
+}
+
+/* ============================================================
+   SPICKZETTEL
+   ============================================================ */
+function cheat(){
+  store.done.cheat=true; save();
+  app.innerHTML=`<div class="bar"><div class="bar-in">
+      <button class="back" id="back">Zurück</button>
+      <span class="bar-title">Spickzettel</span>
+    </div><div class="pbar"><i style="width:100%"></i></div></div>
+  <div class="wrap"><div class="card cheat">
+
+    <h2>Die neun Mindestangaben</h2>
+    <ul>
+      <li>Art, sachliche und zeitliche Gliederung sowie Ziel der Ausbildung</li>
+      <li>Beginn und Dauer der Berufsausbildung</li>
+      <li>Ausbildungsmaßnahmen außerhalb der Ausbildungsstätte</li>
+      <li>Dauer der regelmäßigen täglichen Ausbildungszeit</li>
+      <li>Dauer der Probezeit</li>
+      <li>Zahlung und Höhe der Vergütung</li>
+      <li>Dauer des Urlaubs</li>
+      <li>Voraussetzungen, unter denen gekündigt werden kann</li>
+      <li>Hinweis auf Tarifverträge, Betriebs- oder Dienstvereinbarungen</li>
+    </ul>
+
+    <h2>Vertragsniederschrift</h2>
+    <dl>
+      <dt>Wann</dt><dd>Unverzüglich nach Vertragsabschluss, spätestens vor Beginn der Ausbildung</dd>
+      <dt>Form</dt><dd>Schriftlich, elektronische Form ausgeschlossen</dd>
+      <dt>Minderjährig</dt><dd>Schriftliche Zustimmung der gesetzlichen Vertreter</dd>
+      <dt>Unterschrift</dt><dd>Ausbildender, Auszubildender, gesetzliche Vertreter</dd>
+      <dt>Ausfertigung</dt><dd>Unverzüglich an Azubi und gesetzliche Vertreter</dd>
+    </dl>
+
+    <h2>Kündigung</h2>
+    <table>
+      <tr><th></th><th>Ausbildender</th><th>Auszubildender</th></tr>
+      <tr><th>In der Probezeit</th><td>Jederzeit, fristlos, ohne Grund</td><td>Jederzeit, fristlos, ohne Grund</td></tr>
+      <tr><th>Danach</th><td>Nur aus wichtigem Grund, fristlos</td><td>Wichtiger Grund fristlos — oder 4 Wochen bei Aufgabe/Berufswechsel</td></tr>
+    </table>
+    <ul style="margin-top:9px">
+      <li>Form immer schriftlich, auch in der Probezeit</li>
+      <li>Begründung erst nach der Probezeit</li>
+      <li>Fristlos nur innerhalb von 2 Wochen ab Kenntnis des Grundes</li>
+      <li>Auftragsmangel ist kein wichtiger Grund</li>
+    </ul>
+
+    <h2>Zahlen und Fristen</h2>
+    <dl>
+      <dt>Probezeit</dt><dd>Mindestens 1 Monat, höchstens 4 Monate</dd>
+      <dt>Azubi-Kündigung</dt><dd>4 Wochen bei Aufgabe oder Berufswechsel</dd>
+      <dt>Fristlos</dt><dd>Innerhalb 2 Wochen ab Kenntnis</dd>
+      <dt>Vergütung</dt><dd>Spätestens letzter Arbeitstag des Monats, mindestens jährlich steigend</dd>
+      <dt>Mindestvergütung</dt><dd>724 € im 1. Jahr bei Beginn 2026</dd>
+      <dt>Prüfung</dt><dd>Zweimal wiederholbar</dd>
+      <dt>Verlängerung</dt><dd>Auf Verlangen des Azubi, höchstens 1 Jahr</dd>
+      <dt>Urlaub</dt><dd>24 Werktage; minderjährig 30 / 27 / 25 (unter 16 / 17 / 18)</dd>
+      <dt>Arbeitszeit</dt><dd>Minderjährige 8 Std/Tag, 40 Std/Woche</dd>
+      <dt>Schadensersatz</dt><dd>Innerhalb 3 Monaten nach Beendigung</dd>
+    </dl>
+
+    <h2>Pflichten des Ausbildenden</h2>
+    <ul>
+      <li>Ausbildungsziel vermitteln, nach sachlicher und zeitlicher Gliederung</li>
+      <li>Selbst ausbilden oder geeigneten Ausbilder bestellen</li>
+      <li>Ausbildungsmittel kostenlos stellen</li>
+      <li>Zur Berufsschule anhalten und freistellen</li>
+      <li>Berichtsheft aushändigen, Zeit geben, durchsehen</li>
+      <li>Sorgepflicht: charakterlich fördern, nicht sittlich oder körperlich gefährden</li>
+      <li>Nur ausbildungsbezogene, kräfteangemessene Aufgaben übertragen</li>
+    </ul>
+
+    <h2>Pflichten des Auszubildenden</h2>
+    <ul>
+      <li>Aufgaben sorgfältig ausführen</li>
+      <li>Berufsschule, Prüfungen und außerbetriebliche Maßnahmen besuchen</li>
+      <li>Weisungen befolgen</li>
+      <li>Betriebliche Ordnung beachten</li>
+      <li>Werkzeuge pfleglich behandeln</li>
+      <li>Betriebs- und Geschäftsgeheimnisse wahren</li>
+      <li>Berichtsheft führen und vorlegen</li>
+    </ul>
+
+    <h2>Nichtig im Ausbildungsvertrag</h2>
+    <ul>
+      <li>Entschädigung für die Ausbildung</li>
+      <li>Vertragsstrafen</li>
+      <li>Ausschluss oder Beschränkung von Schadensersatz</li>
+      <li>Pauschalierter Schadensersatz</li>
+      <li>Wettbewerbsverbot nach der Ausbildung</li>
+    </ul>
+
+    <h2>Ende der Ausbildung</h2>
+    <ul>
+      <li>Mit Ablauf der Ausbildungszeit</li>
+      <li>Bei bestandener Prüfung schon mit Bekanntgabe des Ergebnisses</li>
+      <li>Nicht bestanden: auf Verlangen Verlängerung bis zur Wiederholungsprüfung, höchstens 1 Jahr</li>
+      <li>Zeugnis schriftlich, elektronische Form ausgeschlossen</li>
+    </ul>
+
+    <h2>Die drei häufigsten Fallen</h2>
+    <ul>
+      <li>Vier Wochen, nicht ein Monat — Kündigungsfrist des Azubi</li>
+      <li>Der Ausbildungsort ist keine Mindestangabe, der Tarifhinweis schon</li>
+      <li>Verlängerung nach nicht bestandener Prüfung nur auf Verlangen, nicht automatisch</li>
+    </ul>
+
+  </div></div>`;
+  document.getElementById("back").onclick=home;
+  setActions(`<button class="btn" id="hm">Übersicht</button>`);
+  document.getElementById("hm").onclick=home;
+  window.scrollTo(0,0);
+}
+
+home();
+</script>
+</body>
+</html>
